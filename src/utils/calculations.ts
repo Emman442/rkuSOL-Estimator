@@ -1,10 +1,10 @@
 import { ChartDataPoint, ProjectionSummary, StakingMode, StakingRates } from '../types';
 
 export const DEFAULT_RATES: StakingRates = {
-  liquidApy: 4.82, // 4.82% Net APY
-  nativeApy: 5.77, // 5.77% Net APY
-  networkAverageApy: 4.10, // Solana Network Average
-  solPriceUsd: 154.20, // Default SOL price
+  liquidApy: 4.82,
+  nativeApy: 5.77, 
+  networkAverageApy: 4.10,
+  solPriceUsd: 154.20,
   inflationRate: 4.50,
   mevBoostLiquid: 0.82,
   mevBoostNative: 1.27,
@@ -19,10 +19,7 @@ export const TIME_HORIZONS = [
   { id: '3y', label: '3 years', days: 1095, months: 36 },
 ];
 
-/**
- * Calculates compound return for a given APY, principal, and number of days.
- * Compound frequency for Solana is per epoch (~2.5 days = 146 epochs/year).
- */
+
 export function calculateCompoundReturn(
   principal: number,
   apyPercentage: number,
@@ -34,7 +31,7 @@ export function calculateCompoundReturn(
 
   const rate = apyPercentage / 100;
   const years = days / 365.25;
-  // Compounded per epoch (146 times per year)
+
   const epochsPerYear = 146.1;
   const n = epochsPerYear;
   const total = principal * Math.pow(1 + rate / n, n * years);
@@ -43,15 +40,13 @@ export function calculateCompoundReturn(
   return { rewards, total };
 }
 
-/**
- * Generates data points for the cumulative rewards chart across the selected horizon.
- */
+
 export function generateChartData(
   principal: number,
   days: number,
   rates: StakingRates
 ): ChartDataPoint[] {
-  const steps = 30; // 30 uniform intervals for smooth plotting
+  const steps = 30; 
   const interval = days / steps;
   const points: ChartDataPoint[] = [];
 

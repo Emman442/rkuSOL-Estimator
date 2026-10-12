@@ -32,12 +32,10 @@ export const MainEstimatorCard: React.FC<MainEstimatorCardProps> = ({
   showComparison,
   onToggleComparison,
 }) => {
-  // Slider uses power of 3 scale to smoothly handle 1 to 100,000 SOL
-  // normalized slider position: 0 to 100
+
   const sliderMin = 1;
   const sliderMax = 100000;
 
-  // Convert amount to slider 0-100 position using log scale
   const amountToSlider = (val: number) => {
     const minLog = Math.log(sliderMin);
     const maxLog = Math.log(sliderMax);
@@ -45,7 +43,6 @@ export const MainEstimatorCard: React.FC<MainEstimatorCardProps> = ({
     return ((Math.log(clamped) - minLog) / (maxLog - minLog)) * 100;
   };
 
-  // Convert slider 0-100 position back to amount
   const sliderToAmount = (pos: number) => {
     const minLog = Math.log(sliderMin);
     const maxLog = Math.log(sliderMax);

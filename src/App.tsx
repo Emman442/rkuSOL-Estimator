@@ -20,7 +20,6 @@ export default function App() {
   const [showComparison, setShowComparison] = useState<boolean>(true);
   const rates = DEFAULT_RATES;
 
-  // Dynamic calculations memoized for instant responsive updates
   const summary = useMemo(() => {
     return getProjectionSummary(
       stakedAmount,

@@ -22,12 +22,11 @@ export const YieldChart: React.FC<YieldChartProps> = ({
 
   if (!data || data.length === 0) return null;
 
-  // Find max reward value to scale Y axis nicely
   const maxActive = Math.max(
     ...data.map((d) => (mode === 'liquid' ? d.liquidRewards : d.nativeRewards))
   );
   const maxBenchmark = Math.max(...data.map((d) => d.benchmarkRewards));
-  const maxY = Math.max(maxActive, maxBenchmark, 0.001) * 1.15; // 15% top padding
+  const maxY = Math.max(maxActive, maxBenchmark, 0.001) * 1.15;
 
   const width = 640;
   const height = 230;
@@ -47,31 +46,29 @@ export const YieldChart: React.FC<YieldChartProps> = ({
     return paddingTop + innerHeight - (val / maxY) * innerHeight;
   };
 
-  // Build SVG path strings
+  
   const activeKey = mode === 'liquid' ? 'liquidRewards' : 'nativeRewards';
   const points = data.map((d, i) => `${getX(i)},${getY(d[activeKey])}`);
   const linePath = `M ${points.join(' L ')}`;
   const areaPath = `${linePath} L ${getX(data.length - 1)},${paddingTop + innerHeight} L ${paddingLeft},${paddingTop + innerHeight} Z`;
 
-  // Benchmark path
   const benchmarkPoints = data.map((d, i) => `${getX(i)},${getY(d.benchmarkRewards)}`);
   const benchmarkLinePath = `M ${benchmarkPoints.join(' L ')}`;
 
-  // Currently hovered or final point
   const activePointIndex = hoverIndex !== null ? hoverIndex : data.length - 1;
   const currentPoint = data[activePointIndex];
   const currentActiveReward = currentPoint ? currentPoint[activeKey] : 0;
   const currentBenchmarkReward = currentPoint ? currentPoint.benchmarkRewards : 0;
   const deltaReward = currentActiveReward - currentBenchmarkReward;
 
-  // Y-axis grid ticks (3 ticks)
+
   const yTicks = [
     0,
     maxY * 0.5,
     maxY * 0.95,
   ];
 
-  // X-axis 4 representative milestones
+
   const xMilestones = [
     0,
     Math.floor((data.length - 1) * 0.33),
@@ -81,7 +78,6 @@ export const YieldChart: React.FC<YieldChartProps> = ({
 
   return (
     <div className="w-full bg-[#fdfcf9] border border-[#e5e1d8] rounded-xl p-4 sm:p-5">
-      {/* Chart Top Header & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <div className="text-xs uppercase tracking-wider text-[#6b7c70] font-semibold flex items-center gap-2">
@@ -117,7 +113,6 @@ export const YieldChart: React.FC<YieldChartProps> = ({
         </div>
       </div>
 
-      {/* SVG Chart Container */}
       <div className="relative w-full overflow-hidden select-none">
         <svg
           viewBox={`0 0 ${width} ${height}`}
@@ -170,10 +165,10 @@ export const YieldChart: React.FC<YieldChartProps> = ({
             />
           )}
 
-          {/* Active Gradient Fill */}
+
           <path d={areaPath} fill={`url(#${gradientId})`} />
 
-          {/* Active Solid Line */}
+
           <path
             d={linePath}
             fill="none"
@@ -183,10 +178,8 @@ export const YieldChart: React.FC<YieldChartProps> = ({
             strokeLinejoin="round"
           />
 
-          {/* Interactive Crosshair & Cursor */}
           {activePointIndex !== null && (
             <g>
-              {/* Vertical line indicator */}
               <line
                 x1={getX(activePointIndex)}
                 y1={paddingTop}
