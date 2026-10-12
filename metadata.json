@@ -1,0 +1,7 @@
+{
+  "name": "Raiku Staking Rewards Estimator",
+  "description": "Institutional-grade staking rewards calculator for Raiku rkuSOL liquid staking and native validator delegation on Solana.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
