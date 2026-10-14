@@ -1,7 +1,7 @@
 import { ChartDataPoint, ProjectionSummary, StakingMode, StakingRates } from '../types';
 
 export const DEFAULT_RATES: StakingRates = {
-  liquidApy: 4.82,
+  liquidApy: 4.80,
   nativeApy: 5.77, 
   networkAverageApy: 4.10,
   solPriceUsd: 154.20,
