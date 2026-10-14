@@ -436,7 +436,7 @@ export const DeFiIntegrationsSection: React.FC<DeFiIntegrationsSectionProps> = (
                 </div>
               ) : (
                 <div className="mt-2 pt-2 border-t border-[#e2dbce] flex items-center gap-1.5 text-[#596d5e] text-[11px]">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#2d6343] shrink-0" />
+                  {/* <ShieldCheck className="w-3.5 h-3.5 text-[#2d6343] shrink-0" /> */}
                   <span>1.0x unleveraged position (no debt or liquidation threshold).</span>
                 </div>
               )}
